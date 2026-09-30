@@ -4,8 +4,8 @@ Personal notes, articles, Q&As, and references for learning and revisiting iOS a
 
 ## Testing
 
-- [Modern Unit Testing with Swift Testing](https://www.avanderlee.com/swift-testing/modern-unit-test/)
+- [Modern Unit Testing with Swift Testing](https://www.avanderlee.com/swift-testing/modern-unit-test/) — An introduction to Apple's Swift Testing framework, including `@Test`, `#expect`, `#require`, parameterized tests, and how it compares with XCTest.
 
 ## Libraries
 
-- [Nimble](https://github.com/Quick/Nimble)
+- [Nimble](https://github.com/Quick/Nimble) — A matcher framework for Swift and Objective-C that provides expressive, readable assertions and can be used with Swift Testing or XCTest.
