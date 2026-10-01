@@ -2,6 +2,10 @@
 
 Personal notes, articles, Q&As, and references for learning and revisiting iOS and Swift development.
 
+## Resources
+
+- [Apple Developer](https://developer.apple.com/) — Official Apple documentation, guides, API references, videos, and resources for building apps across Apple platforms.
+
 ## Testing
 
 - [Modern Unit Testing with Swift Testing](https://www.avanderlee.com/swift-testing/modern-unit-test/) — An introduction to Apple's Swift Testing framework, including `@Test`, `#expect`, `#require`, parameterized tests, and how it compares with XCTest.
