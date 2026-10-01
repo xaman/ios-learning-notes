@@ -5,6 +5,7 @@ Personal notes, articles, Q&As, and references for learning and revisiting iOS a
 ## Resources
 
 - [Apple Developer](https://developer.apple.com/) — Official Apple documentation, guides, API references, videos, and resources for building apps across Apple platforms.
+- [App Store Connect](https://appstoreconnect.apple.com/apps) — Manage apps, builds, TestFlight, App Store listings, submissions, analytics, and related distribution settings.
 
 ## Testing
 
