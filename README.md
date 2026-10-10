@@ -19,6 +19,7 @@ Personal notes, articles, Q&As, and references for learning and revisiting iOS a
 
 - [What does `nonisolated` mean on a struct?](#what-does-nonisolated-mean-on-a-struct)
 - [What is `Decodable`?](#what-is-decodable)
+- [What is `CaseIterable`?](#what-is-caseiterable)
 
 ### What does `nonisolated` mean on a struct?
 
@@ -28,3 +29,6 @@ It opts the type out of actor isolation. With Swift 6.2 default actor isolation 
 
 A protocol for types that can be created from external data such as JSON, e.g. `try JSONDecoder().decode(Item.self, from: data)`. If every stored property is `Decodable`, the compiler synthesizes the conformance: property names map to keys, optionals decode missing or `null` values as `nil`, and a missing or mistyped required field throws a `DecodingError`. Write a custom `init(from:)` for special cases, such as `try?` to turn one malformed array element into `nil` instead of failing the whole payload. Use `CodingKeys` to rename keys, and decoder strategies like `.convertFromSnakeCase` for key or date formats. `Codable` is `Decodable & Encodable`. Keep `Decodable` on DTOs in the data layer that mirror the JSON, and map them to domain models so the wire format stays an implementation detail. See [Decodable](https://developer.apple.com/documentation/swift/decodable) and [Encoding and Decoding Custom Types](https://developer.apple.com/documentation/foundation/encoding-and-decoding-custom-types).
 
+### What is `CaseIterable`?
+
+A protocol that gives a type a static `allCases` collection with every value. For an enum without associated values, the compiler synthesizes it in declaration order: `enum Appearance: CaseIterable { case system, light, dark }` gets `Appearance.allCases == [.system, .light, .dark]`. Use it to build UI from the cases, e.g. `ForEach(Appearance.allCases)` in a `Picker`, so a new case shows up without view changes, and to loop over every case in tests. Synthesis only works when the conformance is declared in the enum's own file and no case has associated values or `@available` attributes; otherwise implement `allCases` yourself. See [CaseIterable](https://developer.apple.com/documentation/swift/caseiterable).
