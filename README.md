@@ -18,7 +18,13 @@ Personal notes, articles, Q&As, and references for learning and revisiting iOS a
 ## Q&A
 
 - [What does `nonisolated` mean on a struct?](#what-does-nonisolated-mean-on-a-struct)
+- [What is `Decodable`?](#what-is-decodable)
 
 ### What does `nonisolated` mean on a struct?
 
 It opts the type out of actor isolation. With Swift 6.2 default actor isolation (`.defaultIsolation(MainActor.self)` or the *Default Actor Isolation* build setting), every type is implicitly `@MainActor`, and with `InferIsolatedConformances` so are its conformances (`Hashable`, `Decodable`, …). A `nonisolated struct` is a plain value type again, usable from any thread. Use it for models, DTOs and pure helpers that cross actors; keep views and view models on the main actor. It doesn't make a type `Sendable` by itself. See [Default Actor Isolation in Swift 6.2](https://www.avanderlee.com/concurrency/default-actor-isolation-in-swift-6-2/) and [SE-0466](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0466-control-default-actor-isolation.md).
+
+### What is `Decodable`?
+
+A protocol for types that can be created from external data such as JSON, e.g. `try JSONDecoder().decode(Item.self, from: data)`. If every stored property is `Decodable`, the compiler synthesizes the conformance: property names map to keys, optionals decode missing or `null` values as `nil`, and a missing or mistyped required field throws a `DecodingError`. Write a custom `init(from:)` for special cases, such as `try?` to turn one malformed array element into `nil` instead of failing the whole payload. Use `CodingKeys` to rename keys, and decoder strategies like `.convertFromSnakeCase` for key or date formats. `Codable` is `Decodable & Encodable`. Keep `Decodable` on DTOs in the data layer that mirror the JSON, and map them to domain models so the wire format stays an implementation detail. See [Decodable](https://developer.apple.com/documentation/swift/decodable) and [Encoding and Decoding Custom Types](https://developer.apple.com/documentation/foundation/encoding-and-decoding-custom-types).
+
